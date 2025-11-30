@@ -27,22 +27,12 @@ public partial class IdentityPlugin : BasePlugin
     public IdentityPlugin(ISwiftlyCore core)
         : base(core)
     {
-        Url = core.ConVar.Create("identity_url", "URL for fetching player identity.", "");
-        IsStrict = core.ConVar.Create(
-            "identity_strict",
-            "Whether to kick the player if we fail to get their data.",
-            true
-        );
-        IsForceNickname = core.ConVar.Create(
-            "identity_force_nickname",
-            "Whether to force player nickname.",
-            true
-        );
-        IsForceRating = core.ConVar.Create(
-            "identity_force_rating",
-            "Whether to force player rating.",
-            true
-        );
+        // csharpier-ignore-start
+        Url             = core.ConVar.Create("identity_url",            "URL for fetching player identity.",                        "");
+        IsStrict        = core.ConVar.Create("identity_strict",         "Whether to kick the player if we fail to get their data.", true);
+        IsForceNickname = core.ConVar.Create("identity_force_nickname", "Whether to force player nickname.",                        true);
+        IsForceRating   = core.ConVar.Create("identity_force_rating",   "Whether to force player rating.",                          true);
+        // csharpier-ignore-end
 
         core.Event.OnTick += OnTick;
 
