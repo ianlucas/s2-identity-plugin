@@ -41,6 +41,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
-          tag_name: v${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
           files: |
             ${{ env.project_name }}-v${{ github.ref_name }}.zip
