@@ -37,7 +37,6 @@ public partial class IdentityPlugin
                 cts.Token
             );
             response.EnsureSuccessStatusCode();
-
             string jsonContent = response.Content.ReadAsStringAsync().Result;
             User? data = JsonSerializer.Deserialize<User>(jsonContent);
             return data;
