@@ -26,17 +26,22 @@ public partial class IdentityPlugin
         var name = player.Controller.PlayerName;
         if (player.IsFakeClient || !IsEnabled() || PendingFetchPlayers.ContainsKey(steamId))
             return;
-        Core.Logger.LogInformation("Player {Name} (id: {Id}) is authenticating.", name, steamId);
+        Core.Logger.LogInformation("Player {Name} (id: {Id}) is authenticating...", name, steamId);
         PendingFetchPlayers.TryAdd(steamId, true);
         var user = await FetchUser(steamId);
         PendingFetchPlayers.Remove(steamId, out _);
+        Core.Logger.LogInformation("Player {Name} (id: {Id}) is authenticated.", name, steamId);
         Core.Scheduler.NextTick(() =>
         {
-            if (
-                !player.IsValid
-                || player.Controller.Connected > PlayerConnectedState.PlayerConnecting
-            )
+            if (!player.Controller.IsValid)
+            {
+                Core.Logger.LogInformation(
+                    "Player {Name} (id: {Id}) is no longer valid.",
+                    name,
+                    steamId
+                );
                 return;
+            }
             if (user == null)
             {
                 if (IsStrict.Value)
@@ -75,12 +80,15 @@ public partial class IdentityPlugin
                     else
                         user.Player.SetRating(user.Rating);
                 var pressedButtons = user.Player.PressedButtons;
+                var lastPressedButtons = LastPlayerPressedButtons.GetOrAdd(
+                    steamId,
+                    GameButtonFlags.None
+                );
                 if (
                     (pressedButtons & GameButtonFlags.Tab) != 0
-                    && (LastPlayerPressedButtons[steamId] & GameButtonFlags.Tab) == 0
+                    && (lastPressedButtons & GameButtonFlags.Tab) == 0
                 )
                     revealRecipients.Add(user.Player.PlayerID);
-
                 LastPlayerPressedButtons[steamId] = pressedButtons;
             }
         if (revealRecipients.Count > 0)
