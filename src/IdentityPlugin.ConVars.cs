@@ -11,22 +11,22 @@ public partial class IdentityPlugin
 {
     public readonly IConVar<string> Url = core.ConVar.Create(
         "identity_url",
-        "URL for fetching player identity.",
+        "URL endpoint for fetching player identity data.",
         ""
     );
     public readonly IConVar<bool> IsStrict = core.ConVar.Create(
         "identity_strict",
-        "Whether to kick the player if we fail to get their data.",
+        "Kick players when their identity data cannot be retrieved.",
         true
     );
     public readonly IConVar<bool> IsForceNickname = core.ConVar.Create(
         "identity_force_nickname",
-        "Whether to force player nickname.",
+        "Override player nicknames with their identity nickname.",
         true
     );
     public readonly IConVar<bool> IsForceRating = core.ConVar.Create(
         "identity_force_rating",
-        "Whether to force player rating.",
+        "Override player ratings with their identity rating.",
         true
     );
 }
