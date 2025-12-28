@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Convars;
 
-namespace IdentityPlugin;
+namespace Identity;
 
 public class Api
 {

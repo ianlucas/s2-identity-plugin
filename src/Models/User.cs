@@ -6,7 +6,7 @@
 using System.Text.Json.Serialization;
 using SwiftlyS2.Shared.Players;
 
-namespace IdentityPlugin;
+namespace Identity;
 
 public class User
 {

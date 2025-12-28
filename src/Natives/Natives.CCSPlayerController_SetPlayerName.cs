@@ -5,7 +5,7 @@
 
 using SwiftlyS2.Shared.Memory;
 
-namespace IdentityPlugin;
+namespace Identity;
 
 public static partial class Natives
 {

@@ -5,9 +5,9 @@
 
 using SwiftlyS2.Shared.SchemaDefinitions;
 
-namespace IdentityPlugin;
+namespace Identity;
 
-public partial class IdentityPlugin
+public partial class Identity
 {
     public Natives.CCSPlayerController_SetPlayerNameDelegate OnSetPlayerName(
         Func<Natives.CCSPlayerController_SetPlayerNameDelegate> next

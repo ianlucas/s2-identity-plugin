@@ -6,9 +6,9 @@
 using SwiftlyS2.Shared.GameEventDefinitions;
 using SwiftlyS2.Shared.Misc;
 
-namespace IdentityPlugin;
+namespace Identity;
 
-public partial class IdentityPlugin
+public partial class Identity
 {
     public HookResult OnPlayerDisconnect(EventPlayerDisconnect @event)
     {

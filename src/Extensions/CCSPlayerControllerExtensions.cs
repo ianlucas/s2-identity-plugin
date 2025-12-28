@@ -5,7 +5,7 @@
 
 using SwiftlyS2.Shared.SchemaDefinitions;
 
-namespace IdentityPlugin;
+namespace Identity;
 
 public static class CCSPlayerControllerExtensions
 {

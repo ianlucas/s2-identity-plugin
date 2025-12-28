@@ -7,16 +7,16 @@ using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.GameEventDefinitions;
 using SwiftlyS2.Shared.Plugins;
 
-namespace IdentityPlugin;
+namespace Identity;
 
 [PluginMetadata(
-    Id = "IdentityPlugin",
+    Id = "Identity",
     Version = "1.0.0",
-    Name = "IdentityPlugin",
+    Name = "Identity",
     Author = "Ian Lucas",
     Description = "Authenticates external users."
 )]
-public partial class IdentityPlugin(ISwiftlyCore core) : BasePlugin(core)
+public partial class Identity(ISwiftlyCore core) : BasePlugin(core)
 {
     public override void Load(bool hotReload)
     {

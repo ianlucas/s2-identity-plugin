@@ -9,9 +9,9 @@ using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 
-namespace IdentityPlugin;
+namespace Identity;
 
-public partial class IdentityPlugin
+public partial class Identity
 {
     public readonly ConcurrentDictionary<ulong, bool> UserInFetchManager = [];
     public readonly ConcurrentDictionary<ulong, User> UserManager = [];

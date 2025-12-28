@@ -5,9 +5,9 @@
 
 using SwiftlyS2.Shared.Events;
 
-namespace IdentityPlugin;
+namespace Identity;
 
-public partial class IdentityPlugin
+public partial class Identity
 {
     public void OnTick()
     {

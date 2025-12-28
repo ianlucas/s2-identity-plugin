@@ -5,7 +5,7 @@ on:
     types: [published]
 
 env:
-  project_name: IdentityPlugin
+  project_name: Identity
 
 jobs:
   build:

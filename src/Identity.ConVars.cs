@@ -5,9 +5,9 @@
 
 using SwiftlyS2.Shared.Convars;
 
-namespace IdentityPlugin;
+namespace Identity;
 
-public partial class IdentityPlugin
+public partial class Identity
 {
     public readonly IConVar<string> Url = core.ConVar.Create(
         "identity_url",
