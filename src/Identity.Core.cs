@@ -27,7 +27,7 @@ public partial class Identity
         foreach (var player in Core.PlayerManager.GetAllPlayers())
             if (!player.IsFakeClient)
             {
-                var rating = player.State.Data?.Rating;
+                var rating = player.GetState().Data?.Rating;
                 if (teamIntroPeriod)
                     player.Controller.HideCompetitiveRanking();
                 else if (rating != null)
@@ -39,13 +39,14 @@ public partial class Identity
     {
         var steamId = player.SteamID;
         var name = player.Controller.PlayerName;
-        if (player.IsFakeClient || !Api.IsActive() || player.State.IsFetching)
+        var playerState = player.GetState();
+        if (player.IsFakeClient || !Api.IsActive() || playerState.IsFetching)
             return;
         Core.Logger.LogInformation("Player {Name} (id: {Id}) is authenticating...", name, steamId);
-        player.State.IsFetching = true;
+        playerState.IsFetching = true;
         var user = await Api.FetchUser(steamId);
-        player.State.Data = user;
-        player.State.IsFetching = false;
+        playerState.Data = user;
+        playerState.IsFetching = false;
         Core.Scheduler.NextWorldUpdate(() =>
         {
             if (!player.Controller.IsValid)
@@ -90,12 +91,13 @@ public partial class Identity
     {
         if (!ConVars.IsForceRating.Value)
             return;
+        var playerState = player.GetState();
         var pressedButtons = player.PressedButtons;
         var isSendNetMessage = (
             (pressedButtons & GameButtonFlags.Tab) != 0
-            && (player.State.LastPressedButtons & GameButtonFlags.Tab) == 0
+            && (playerState.LastPressedButtons & GameButtonFlags.Tab) == 0
         );
-        player.State.LastPressedButtons = pressedButtons;
+        playerState.LastPressedButtons = pressedButtons;
         if (isSendNetMessage)
             Core.NetMessage.Send<CCSUsrMsg_ServerRankRevealAll>(msg =>
                 msg.Recipients.AddRecipient(player.PlayerID)

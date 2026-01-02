@@ -14,7 +14,10 @@ public static class IPlayerExtensions
 
     extension(IPlayer self)
     {
-        public IPlayerState State => _playerStateManager.GetOrAdd(self.SteamID, _ => new());
+        public IPlayerState GetState()
+        {
+            return _playerStateManager.GetOrAdd(self.SteamID, _ => new());
+        }
 
         public void RemoveState()
         {
