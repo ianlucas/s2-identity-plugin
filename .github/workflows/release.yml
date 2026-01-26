@@ -7,6 +7,16 @@ on:
         description: "Version to release (e.g. 1.0.0)"
         required: true
         type: string
+      draft:
+        description: "Create as draft release"
+        required: false
+        type: boolean
+        default: false
+      prerelease:
+        description: "Create as pre-release"
+        required: false
+        type: boolean
+        default: false
 
 env:
   project_name: Identity
@@ -57,5 +67,6 @@ jobs:
           gh release create ${{ inputs.version }} \
             --title "v${{ inputs.version }}" \
             --notes-file changelog.txt \
-            --draft \
+            ${{ inputs.draft && '--draft' || '' }} \
+            ${{ inputs.prerelease && '--prerelease' || '' }} \
             ${{ env.project_name }}-v${{ inputs.version }}.zip
