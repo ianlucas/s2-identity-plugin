@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+using System.Runtime.InteropServices;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace Identity;
@@ -13,16 +14,19 @@ public partial class Identity
         Func<Natives.CCSPlayerController_SetPlayerNameDelegate> next
     )
     {
-        return (thisPtr, playerName) =>
+        return (thisPtr, playerNamePtr) =>
         {
-            next()(thisPtr, playerName);
+            next()(thisPtr, playerNamePtr);
             var controller = Core.Memory.ToSchemaClass<CCSPlayerController>(thisPtr);
-            if (ConVars.IsForceNickname.Value && controller.SteamID != 0)
+            Core.Scheduler.NextWorldUpdate(() =>
             {
-                var nickname = controller.ToPlayer()?.GetState().Data?.Nickname;
-                if (nickname != null)
-                    controller.SetPlayerName(nickname);
-            }
+                if (controller.IsValid && ConVars.IsForceNickname.Value && controller.SteamID != 0)
+                {
+                    var nickname = controller.ToPlayer()?.GetState().Data?.Nickname;
+                    if (nickname != null)
+                        controller.SetPlayerName(nickname);
+                }
+            });
         };
     }
 }
