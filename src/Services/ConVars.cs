@@ -10,22 +10,22 @@ namespace Identity;
 
 public static class ConVars
 {
-    public static readonly IConVar<string> Url = Swiftly.Core.ConVar.Create(
+    public static readonly IConVar<string> Url = Swiftly.Core.ConVar.CreateOrFind(
         "identity_url",
         "URL endpoint for fetching player identity data.",
         ""
     );
-    public static readonly IConVar<bool> IsStrict = Swiftly.Core.ConVar.Create(
+    public static readonly IConVar<bool> IsStrict = Swiftly.Core.ConVar.CreateOrFind(
         "identity_strict",
         "Kick players when their identity data cannot be retrieved.",
         true
     );
-    public static readonly IConVar<bool> IsForceNickname = Swiftly.Core.ConVar.Create(
+    public static readonly IConVar<bool> IsForceNickname = Swiftly.Core.ConVar.CreateOrFind(
         "identity_force_nickname",
         "Override player nicknames with their identity nickname.",
         true
     );
-    public static readonly IConVar<bool> IsForceRating = Swiftly.Core.ConVar.Create(
+    public static readonly IConVar<bool> IsForceRating = Swiftly.Core.ConVar.CreateOrFind(
         "identity_force_rating",
         "Override player ratings with their identity rating.",
         true
